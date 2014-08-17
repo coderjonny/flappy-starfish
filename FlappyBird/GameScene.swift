@@ -102,16 +102,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let birdTexture2 = SKTexture(imageNamed: "bird-02")
         birdTexture2.filteringMode = .Nearest
         
-        let anim = SKAction.animateWithTextures([birdTexture1, birdTexture2], timePerFrame: 0.2)
+        let anim = SKAction.animateWithTextures([birdTexture1, birdTexture2], timePerFrame: 0.05)
         let flap = SKAction.repeatActionForever(anim)
         
         bird = SKSpriteNode(texture: birdTexture1)
-        bird.setScale(2.0)
+        bird.setScale(1)
         bird.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6)
         bird.runAction(flap)
         
         
-        bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 2.0)
+        bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 1)
         bird.physicsBody.dynamic = true
         bird.physicsBody.allowsRotation = false
         
@@ -141,7 +141,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     func spawnPipes() {
         let pipePair = SKNode()
-        pipePair.position = CGPointMake( self.frame.size.width + pipeTextureUp.size().width * 2, 0 )
+        pipePair.position = CGPointMake(
+            self.frame.size.width + pipeTextureUp.size().width * 2, 0
+        )
         pipePair.zPosition = -10
         
         let height = UInt32( self.frame.size.height / 4 )
